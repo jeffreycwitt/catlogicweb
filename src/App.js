@@ -1,24 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
+import CreateProposition from './CreateProposition';
+import PropositionList from './PropositionList';
 import './App.css';
+import C from 'catlogicjs'
 
-function App() {
+const App = () => {
+  const [propositions, setPropositions] = useState([])
+  const [focusProposition, setFocusProposition] = useState(new C.Proposition("universal", "S", "affirmative", "P", "true"))
+  const handleAddToPropositionList = (proposition) => {
+    setPropositions([...propositions, proposition])
+  }
+  const handleFocusProposition = (proposition) => {
+    setFocusProposition(proposition)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CreateProposition handleAddToPropositionList={handleAddToPropositionList} focusProposition={focusProposition}/>
+      <PropositionList propositions={propositions} handleFocusProposition={handleFocusProposition}/>
     </div>
   );
 }
