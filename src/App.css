@@ -37,3 +37,16 @@
     transform: rotate(360deg);
   }
 }
+
+.valid{
+  background-color: #61cb78;
+}
+.invalid{
+  background-color: #ff8383;
+}
+.true{
+  background-color: #61cb78;
+}
+.false{
+  background-color: #ff8383;
+}

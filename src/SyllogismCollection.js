@@ -2,11 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Syllogism from './Syllogism'
 
 const SyllogismCollection = (props) => {
-  const handleFocusSyllogism = (s) => {
-    props.f.handleFocusMajor(s.major)
-    props.f.handleFocusMinor(s.minor)
-    props.f.handleFocusConclusion(s.conclusion)
-  }
   return (
     <div>
     <h3>Syllogism Collection</h3>
@@ -15,7 +10,6 @@ const SyllogismCollection = (props) => {
       return(
       <div>
         <Syllogism s={s} f={props.f}/>
-        <button onClick={() => handleFocusSyllogism(s)}>Focus</button>
       </div>
       )
     })

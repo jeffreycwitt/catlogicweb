@@ -3,6 +3,7 @@ import FocusProposition from './FocusProposition';
 import PropositionCollection from './PropositionCollection';
 import SyllogismCollection from './SyllogismCollection';
 import FocusSyllogism from './FocusSyllogism';
+import FocusPremisePair from './FocusPremisePair';
 import './App.css';
 import C from 'catlogicjs'
 
@@ -11,10 +12,13 @@ const App = () => {
   const [syllogisms, setSyllogisms] = useState([])
   const [focusProposition, setFocusProposition] = useState(new C.Proposition("universal", "S", "affirmative", "P", "true"))
   const at = new C.Proposition("universal", "dogs", "affirmative", "animals", "true")
+  const at2 = new C.Proposition("universal", "cute things", "affirmative", "dogs", "true")
+  const at3 = new C.Proposition("universal", "cute things", "affirmative", "animals", "true")
   const [major, setMajor] = useState(at)
-  const [minor, setMinor] = useState(at)
-  const [conclusion, setConclusion] = useState(at)
+  const [minor, setMinor] = useState(at2)
+  const [conclusion, setConclusion] = useState(at3)
   const [focusSyllogism, setFocusSyllogism] = useState(new C.Syllogism(major, minor, conclusion))
+  const [focusPremisePair, setFocusPremisePair] = useState(new C.PremisePair(major, minor))
   const handleAddToSyllogismCollection = (syllogism) => {
     setSyllogisms([...syllogisms, syllogism])
   }
@@ -35,6 +39,7 @@ const App = () => {
   }
   useEffect(() => {
     setFocusSyllogism(new C.Syllogism(major, minor, conclusion))
+    setFocusPremisePair(new C.PremisePair(major, minor))
   }, [major, minor, conclusion])
 
   const functions = {
@@ -50,6 +55,9 @@ const App = () => {
       <div>
         <FocusProposition f={functions} proposition={focusProposition}/>
         <PropositionCollection f={functions} propositions={propositions}/>
+      </div>
+      <div>
+        <FocusPremisePair f={functions} premisePair={focusPremisePair}/>
       </div>
       <div>
         <FocusSyllogism f={functions} syllogism={focusSyllogism}/>

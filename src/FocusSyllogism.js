@@ -10,7 +10,6 @@ const FocusSyllogism = (props) => {
       <div>
         <h3>Focused Syllogism</h3>
         <Syllogism s={props.syllogism} f={props.f}/>
-        <button onClick={() => props.f.handleAddToSyllogismCollection(props.syllogism)}>Collection</button>
       </div>
       <div>
         <h3>Validity Tests</h3>

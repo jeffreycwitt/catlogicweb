@@ -41,7 +41,7 @@ const FocusProposition = (props) => {
         </select>
       </form>
       <Proposition heading="Focused" p={p} f={props.f}></Proposition>
-      <p>Distribution: {p.subject.label} : {p.subject.distribution_subject(p.quantity).label} ; {p.predicate.label} : {p.predicate.distribution_predicate(p.quality).label}</p>
+      <p>Distribution: {p.subject.label} : {p.subject.distribution(p).label} ; {p.predicate.label} : {p.predicate.distribution(p).label}</p>
       <div>
       <h3>Immediate Inferences</h3>
       <Proposition heading="Contradictory" p={p.contradictory()} f={props.f}></Proposition>
