@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import FocusProposition from './FocusProposition';
+import InferredPropositions from './InferredPropositions';
 import PropositionCollection from './PropositionCollection';
 import SyllogismCollection from './SyllogismCollection';
 import FocusSyllogism from './FocusSyllogism';
@@ -9,6 +10,7 @@ import C from 'catlogicjs'
 
 const App = () => {
   const [propositions, setPropositions] = useState([])
+  const [inferredPropositions, setInferredPropositions] = useState([])
   const [syllogisms, setSyllogisms] = useState([])
   const [focusProposition, setFocusProposition] = useState(new C.Proposition("universal", "S", "affirmative", "P", "true"))
   const at = new C.Proposition("universal", "dogs", "affirmative", "animals", "true")
@@ -19,11 +21,34 @@ const App = () => {
   const [conclusion, setConclusion] = useState(at3)
   const [focusSyllogism, setFocusSyllogism] = useState(new C.Syllogism(major, minor, conclusion))
   const [focusPremisePair, setFocusPremisePair] = useState(new C.PremisePair(major, minor))
+  const handleInferUniquePropositions = (set) => {
+
+    const entranceArrayFlat = inferredPropositions.flat()
+
+    const entranceArrayProps = entranceArrayFlat.map((p, i) => {
+      return  p.proposition ? p.proposition : p
+    })
+    const newInferredPropositions = new C.PremiseCollection(entranceArrayProps).inferredTruthsUnique()
+    const newArray = [...inferredPropositions]
+    newArray.push(newInferredPropositions)
+    setInferredPropositions(newArray)
+  }
+  const handleInferAllPropositions = (set) => {
+    const entranceArrayFlat = inferredPropositions.flat()
+    const entranceArrayProps = entranceArrayFlat.map((p, i) => {
+      return  p.proposition ? p.proposition : p
+    })
+    const newInferredPropositions = new C.PremiseCollection(entranceArrayProps).inferredTruths()
+    const newArray = [...inferredPropositions]
+    newArray.push(newInferredPropositions)
+    setInferredPropositions(newArray)
+  }
   const handleAddToSyllogismCollection = (syllogism) => {
     setSyllogisms([...syllogisms, syllogism])
   }
   const handleAddToPropositionCollection = (proposition) => {
     setPropositions([...propositions, proposition])
+    setInferredPropositions([[...propositions, proposition]])
   }
   const handleFocusProposition = (proposition) => {
     setFocusProposition(proposition)
@@ -49,12 +74,15 @@ const App = () => {
     handleFocusMajor,
     handleFocusMinor,
     handleFocusConclusion,
+    handleInferAllPropositions,
+    handleInferUniquePropositions
   }
   return (
     <div className="App">
       <div>
         <FocusProposition f={functions} proposition={focusProposition}/>
         <PropositionCollection f={functions} propositions={propositions}/>
+        <InferredPropositions f={functions} inferredPropositionSets={inferredPropositions} originalPropositions={propositions}/>
       </div>
       <div>
         <FocusPremisePair f={functions} premisePair={focusPremisePair}/>
