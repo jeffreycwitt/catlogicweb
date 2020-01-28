@@ -11,7 +11,6 @@ const PropositionCollection = (props) => {
         return <Proposition p={p} f={props.f}/>
       })
       }
-      <button onClick={() => {props.f.handleInferAllPropositions(props.propositions)}}>Infer All</button>
       <button onClick={() => {props.f.handleInferUniquePropositions(props.propositions)}}>Infer Unique</button>
     </div>
 

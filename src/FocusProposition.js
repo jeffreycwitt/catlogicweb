@@ -46,10 +46,10 @@ const FocusProposition = (props) => {
       <h3>Immediate Inferences</h3>
       <Proposition heading="Contradictory" p={p.contradictory()} f={props.f}></Proposition>
       <Proposition heading="Subaltern" p={p.subaltern()} f={props.f}></Proposition>
-      <Proposition heading="Subaltern" p={p.contrary()} f={props.f}></Proposition>
-      <Proposition heading="Subaltern" p={p.converse()} f={props.f}></Proposition>
-      <Proposition heading="Subaltern" p={p.obverse()} f={props.f}></Proposition>
-      <Proposition heading="Subaltern" p={p.contrapose()} f={props.f}></Proposition>
+      <Proposition heading="Contrary" p={p.contrary()} f={props.f}></Proposition>
+      <Proposition heading="Converse" p={p.converse()} f={props.f}></Proposition>
+      <Proposition heading="Obverse" p={p.obverse()} f={props.f}></Proposition>
+      <Proposition heading="Contrapose" p={p.contrapose()} f={props.f}></Proposition>
       </div>
     </div>
   );

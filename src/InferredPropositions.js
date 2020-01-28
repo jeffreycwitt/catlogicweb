@@ -3,6 +3,44 @@ import Proposition from './Proposition';
 
 
 const InferredPropositions = (props) => {
+  const displayProps = () => {
+    if (props.fetchingInferredPropositionsStatus === "fetching"){
+      return (<p>Calculating</p>)
+    }
+    else if (props.inferredPropositionSets.length > 0){
+
+      const inferredDisplayProps = props.inferredPropositionSets[props.inferredPropositionSets.length - 1].map((ip, i) => {
+        return <Proposition f={props.f} p={ip.proposition}/>
+      })
+      const iterationNumber = props.inferredPropositionSets.length - 1
+      const resultsCount = props.inferredPropositionSets[props.inferredPropositionSets.length - 1].length
+      return (
+        <div>
+          <p>Iteration Number: {iterationNumber}</p>
+          <p>Results: {resultsCount}</p>
+          {inferredDisplayProps}
+        </div>
+      )
+    }
+    else{
+      return null
+    }
+  }
+
+  const displayInferenceButton = () =>
+  {
+    if (props.inferredPropositionSets.length > 1){
+      if (props.inferredPropositionSets[props.inferredPropositionSets.length - 1].length != props.inferredPropositionSets[props.inferredPropositionSets.length - 2].length){
+        return <button onClick={() => {props.f.handleInferUniquePropositions()}}>Infer Unique</button>
+      }
+      else{
+        return null
+      }
+    }
+    else{
+      return <button onClick={() => {props.f.handleInferUniquePropositions()}}>Infer Unique</button>
+    }
+  }
 
   return (
     <div className="syllogism">
@@ -10,16 +48,10 @@ const InferredPropositions = (props) => {
         <h3>Inferred Propositions</h3>
       </div>
       <div>
-      {
-        props.inferredPropositionSets.length > 0 && props.inferredPropositionSets[props.inferredPropositionSets.length - 1].map((ip, i) => {
-            return <Proposition f={props.f} p={ip.proposition}/>
-      })
-    }
-
+        {displayProps()}
       </div>
       <div>
-        <button onClick={() => {props.f.handleInferAllPropositions()}}>Infer All</button>
-        <button onClick={() => {props.f.handleInferUniquePropositions()}}>Infer Unique</button>
+        {displayInferenceButton()}
       </div>
 
     </div>
