@@ -13,7 +13,7 @@ const App = () => {
   const [inferredPropositions, setInferredPropositions] = useState([])
   const [fetchingInferredPropositionsStatus, setFetchingInferredPropositionsStatus] = useState("")
   const [syllogisms, setSyllogisms] = useState([])
-  const [focusProposition, setFocusProposition] = useState(new C.Proposition("universal", "S", "affirmative", "P", "true"))
+  const [focusProposition, setFocusProposition] = useState(new C.Proposition("universal", "dogs", "affirmative", "animals", "true"))
   const at = new C.Proposition("universal", "dogs", "affirmative", "animals", "true")
   const at2 = new C.Proposition("universal", "cute things", "affirmative", "dogs", "true")
   const at3 = new C.Proposition("universal", "cute things", "affirmative", "animals", "true")

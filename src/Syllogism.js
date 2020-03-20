@@ -18,7 +18,7 @@ const Syllogism = (props) => {
           <Proposition heading="Minor" p={props.s.minor} f={props.f}/>
           <Proposition heading="Conclusion" p={props.s.conclusion} f={props.f}/>
         </div>
-        <p>Validity: {props.s.validity().toString()}</p>
+        <p>Form: {props.s.form().label} Validity: {props.s.validity().toString()}</p>
         <button onClick={() => props.f.handleAddToSyllogismCollection(props.s)}>Collection</button>
         <button onClick={() => handleFocusSyllogism(props.s)}>Focus</button>
 
