@@ -5,6 +5,10 @@ import PropositionCollection from './PropositionCollection';
 import SyllogismCollection from './SyllogismCollection';
 import FocusSyllogism from './FocusSyllogism';
 import FocusPremisePair from './FocusPremisePair';
+
+import WebWorker from "./webWorker.js";
+import WebWorkerSetup from "./webWorkerSetup";
+
 import './App.css';
 import C from 'catlogicjs'
 
@@ -22,6 +26,11 @@ const App = () => {
   const [conclusion, setConclusion] = useState(at3)
   const [focusSyllogism, setFocusSyllogism] = useState(new C.Syllogism(major, minor, conclusion))
   const [focusPremisePair, setFocusPremisePair] = useState(new C.PremisePair(major, minor))
+
+  useEffect(() => {
+    
+  }, [])
+
   const handleInferUniquePropositions = (set) => {
     // get last set of newly inferred propositions
     const entranceArrayFlat = inferredPropositions[inferredPropositions.length - 1]
@@ -29,6 +38,15 @@ const App = () => {
     const entranceArrayProps = entranceArrayFlat.map((p, i) => {
       return  p.proposition ? p.proposition : p
     })
+    // webworker could go here
+    // Worker init See https://github.com/petersobolev/cra-worker/blob/master/src/App.js
+    const workerInstance = new WebWorkerSetup(WebWorker) 
+    // Listening for messages from worker
+    workerInstance.addEventListener("message", e => {
+      console.log('[MAIN] MSG FROM WORKER: ', e.data)
+    }, false)
+    workerInstance.postMessage(entranceArrayProps)
+
     // initiate calculation
     const inferredPropositionsPromise = new Promise((resolve, reject) => {
       setFetchingInferredPropositionsStatus("fetching")
