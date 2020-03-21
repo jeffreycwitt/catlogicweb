@@ -6,8 +6,7 @@ import SyllogismCollection from './SyllogismCollection';
 import FocusSyllogism from './FocusSyllogism';
 import FocusPremisePair from './FocusPremisePair';
 
-import WebWorker from "./webWorker.js";
-import WebWorkerSetup from "./webWorkerSetup";
+import myWorker from "./test.worker";
 
 import './App.css';
 import C from 'catlogicjs'
@@ -38,32 +37,32 @@ const App = () => {
     const entranceArrayProps = entranceArrayFlat.map((p, i) => {
       return  p.proposition ? p.proposition : p
     })
-    // webworker could go here
-    // Worker init See https://github.com/petersobolev/cra-worker/blob/master/src/App.js
-    const workerInstance = new WebWorkerSetup(WebWorker) 
-    // Listening for messages from worker
-    workerInstance.addEventListener("message", e => {
-      console.log('[MAIN] MSG FROM WORKER: ', e.data)
-    }, false)
-    workerInstance.postMessage(entranceArrayProps)
-
-    // initiate calculation
-    const inferredPropositionsPromise = new Promise((resolve, reject) => {
+    // webworker
+      const worker = new myWorker()
+      // set response when webworker is done
+      worker.addEventListener("message", e => {
+        setFetchingInferredPropositionsStatus("")
+        console.log('[MAIN] MSG FROM WORKER: ', e.data)
+        // conver returned data to include Proposition object
+        const newSet = e.data.map((d) => {
+          const p = d.proposition
+          const newProp = new C.Proposition(p.quantity.label, p.subject.label, p.quality.label, p.predicate.label, p.truthvalue.label)
+          d.proposition = newProp
+          console.log("new d", d)
+          return d
+        })
+        console.log("newSet", newSet)
+        //load existing props into new Array
+        const newArray = [...inferredPropositions]
+        // ad new Set to new array
+        newArray.push(newSet)
+        setInferredPropositions(newArray)
+      }, false)
+      // begin fetching message
       setFetchingInferredPropositionsStatus("fetching")
-      setTimeout(() => {
-        const result = new C.PremiseCollection(entranceArrayProps).inferredTruthsUnique()
-        resolve(result);
-      }, 2000);
-    })
-    //save results of calcaluation to state
-    inferredPropositionsPromise.then((d) => {
-      setFetchingInferredPropositionsStatus("")
-      console.log(inferredPropositions)
-      console.log("d", d)
-      const newArray = [...inferredPropositions]
-      newArray.push(d)
-      setInferredPropositions(newArray)
-    })
+      // send propositions to worker
+      worker.postMessage(entranceArrayProps)
+      
   }
 
   const handleAddToSyllogismCollection = (syllogism) => {

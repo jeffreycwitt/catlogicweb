@@ -8,7 +8,7 @@ const InferredPropositions = (props) => {
       return (<p>Calculating</p>)
     }
     else if (props.inferredPropositionSets.length > 0){
-
+      console.log("test", props.inferredPropositionSets)
       const inferredDisplayProps = props.inferredPropositionSets[props.inferredPropositionSets.length - 1].map((ip, i) => {
         return <Proposition f={props.f} p={ip.proposition}/>
       })
