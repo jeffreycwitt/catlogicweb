@@ -1,5 +1,8 @@
 import C from 'catlogicjs'
 
+// See https://github.com/timarney/react-app-rewired/issues/426#issuecomment-576423171
+//for why eslin-disable-next-line is necessary
+// eslint-disable-next-line
 self.addEventListener("message", inferTruths);
 
 function inferTruths(e) {
