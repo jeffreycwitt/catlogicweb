@@ -25,6 +25,7 @@ const App = () => {
   const [conclusion, setConclusion] = useState(at3)
   const [focusSyllogism, setFocusSyllogism] = useState(new C.Syllogism(major, minor, conclusion))
   const [focusPremisePair, setFocusPremisePair] = useState(new C.PremisePair(major, minor))
+  const [manualFormEntry, setManualFormEntry] = useState("")
 
   useEffect(() => {
     
@@ -89,6 +90,43 @@ const App = () => {
     setFocusPremisePair(new C.PremisePair(major, minor))
   }, [major, minor, conclusion])
 
+  /**
+   * 
+   * @param {string} mood e.g. "AAA"
+   * @param {string} figure  "1"
+   */
+  const handleManualSetSyllogism = (e) => {
+    e.preventDefault();
+    try{
+      const moodFigure = manualFormEntry;
+      const major = moodFigure.substring(0,1);
+      const minor = moodFigure.substring(1,2);
+      const conclusion = moodFigure.substring(2,3);
+      const figure = new C.Figure(moodFigure.substring(3,4))
+      console.log("figure", figure)
+      const mood = new C.Mood(major, minor, conclusion)
+      const form = new C.Form(mood, figure)
+      const majorProposition = form.majorProposition()
+      console.log(majorProposition)
+      const minorProposition = form.minorProposition()
+      console.log(minorProposition)
+      const conclusionProposition = form.conclusion()
+      console.log(conclusionProposition)
+      //NOTE/TODO: I would prefer to do form.syllogism(). this works in the catlogicjs test; 
+      //but I think something about the order of class imports in catlogicjs index.js 
+      //is messing this up and preventing it from working
+      const syllogism = new C.Syllogism(majorProposition, minorProposition, conclusionProposition)
+      console.log(syllogism.figure())
+      console.log("middle term", syllogism.middleTerm())
+      
+      setFocusSyllogism(syllogism)
+    }
+    catch(err){
+      console.log("error", err)
+    }
+    
+  }
+
   const functions = {
     handleAddToPropositionCollection,
     handleAddToSyllogismCollection,
@@ -110,6 +148,9 @@ const App = () => {
       </div>
       <div>
         <FocusSyllogism f={functions} syllogism={focusSyllogism}/>
+        <form onSubmit={handleManualSetSyllogism}>
+        <input onChange={e =>setManualFormEntry(e.target.value)}/><input type="submit"/>
+        </form>
         <SyllogismCollection f={functions} syllogisms={syllogisms}/>
       </div>
     </div>
