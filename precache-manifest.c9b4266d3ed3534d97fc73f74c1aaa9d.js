@@ -4,11 +4,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/catlogicweb/46003e69336f76a28250.worker.js"
   },
   {
-    "revision": "6f32f12ffbcfff2750fee6008cc86aec",
+    "revision": "26cae1c23eeb4773dc1adefc0d91c81e",
     "url": "/catlogicweb/index.html"
   },
   {
-    "revision": "ead166c604315c9cf6f7",
+    "revision": "80695ed6c104cbe6cfa4",
     "url": "/catlogicweb/static/css/main.a0e0ed59.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/catlogicweb/static/js/2.d625befd.chunk.js.LICENSE"
   },
   {
-    "revision": "ead166c604315c9cf6f7",
-    "url": "/catlogicweb/static/js/main.13c0c44d.chunk.js"
+    "revision": "80695ed6c104cbe6cfa4",
+    "url": "/catlogicweb/static/js/main.25ef0f69.chunk.js"
   },
   {
     "revision": "c3cd34a19e1b9d8f06b9",

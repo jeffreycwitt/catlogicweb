@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/catlogicweb/static/css/main.a0e0ed59.chunk.css",
-    "main.js": "/catlogicweb/static/js/main.13c0c44d.chunk.js",
-    "main.js.map": "/catlogicweb/static/js/main.13c0c44d.chunk.js.map",
+    "main.js": "/catlogicweb/static/js/main.25ef0f69.chunk.js",
+    "main.js.map": "/catlogicweb/static/js/main.25ef0f69.chunk.js.map",
     "runtime-main.js": "/catlogicweb/static/js/runtime-main.c29496f9.js",
     "runtime-main.js.map": "/catlogicweb/static/js/runtime-main.c29496f9.js.map",
     "static/js/2.d625befd.chunk.js": "/catlogicweb/static/js/2.d625befd.chunk.js",
@@ -10,7 +10,7 @@
     "46003e69336f76a28250.worker.js": "/catlogicweb/46003e69336f76a28250.worker.js",
     "46003e69336f76a28250.worker.js.map": "/catlogicweb/46003e69336f76a28250.worker.js.map",
     "index.html": "/catlogicweb/index.html",
-    "precache-manifest.6542bea4dd4f64f792cd8addc99480d3.js": "/catlogicweb/precache-manifest.6542bea4dd4f64f792cd8addc99480d3.js",
+    "precache-manifest.c9b4266d3ed3534d97fc73f74c1aaa9d.js": "/catlogicweb/precache-manifest.c9b4266d3ed3534d97fc73f74c1aaa9d.js",
     "service-worker.js": "/catlogicweb/service-worker.js",
     "static/css/main.a0e0ed59.chunk.css.map": "/catlogicweb/static/css/main.a0e0ed59.chunk.css.map",
     "static/js/2.d625befd.chunk.js.LICENSE": "/catlogicweb/static/js/2.d625befd.chunk.js.LICENSE"
@@ -19,6 +19,6 @@
     "static/js/runtime-main.c29496f9.js",
     "static/js/2.d625befd.chunk.js",
     "static/css/main.a0e0ed59.chunk.css",
-    "static/js/main.13c0c44d.chunk.js"
+    "static/js/main.25ef0f69.chunk.js"
   ]
 }
