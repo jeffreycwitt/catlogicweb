@@ -119,7 +119,10 @@ const App = () => {
       console.log(syllogism.figure())
       console.log("middle term", syllogism.middleTerm())
       
-      setFocusSyllogism(syllogism)
+      setMajor(majorProposition)
+      setMinor(minorProposition)
+      setConclusion(conclusionProposition)
+      
     }
     catch(err){
       console.log("error", err)
